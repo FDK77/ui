@@ -1,5 +1,5 @@
-import { Chats } from '@widgets/chats'
-import { Messages } from '@widgets/messages'
+import { Chats } from '@components/chats'
+import { Messages } from '@components/messages'
 
 export const AppLayout = () => {
   return (
