@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
+import { userSlice } from '@/shared/redux/slices/userSlice'
+
 // import { settingsModalSlice } from '@/widgets/messages/entities/message-header'
 // import { modalUserSlice } from '@/widgets/messages/entities/modal-user/slice'
 // import { confirmModalSlice } from '@/widgets/messages/features/confirm-modal/slice'
@@ -10,10 +12,10 @@ export const store = configureStore({
   reducer: {
     search: searchSlice.reducer,
     chat: chatSlice.reducer,
-    filter: filterSlice.reducer
+    filter: filterSlice.reducer,
+    user: userSlice.reducer
 
     // settingsModal: settingsModalSlice.reducer,
-    // modalUser: modalUserSlice.reducer,
     // confirmModal: confirmModalSlice.reducer
   }
 })
