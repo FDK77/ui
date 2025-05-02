@@ -29,7 +29,7 @@ export const FilterWrapper = ({ children }: { children: React.ReactNode }) => {
     } else {
       dispatch(unselectFilter())
     }
-  })
+  }, [selectedChatFilters])
 
   return (
     <div
