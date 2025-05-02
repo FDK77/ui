@@ -1,0 +1,20 @@
+import { useEffect, useState } from 'react'
+
+import { Chat } from '@/shared/type/chat'
+
+import { getChats } from '../requests/chats'
+
+export const useGetChats = () => {
+  const [dataChats, setDataChats] = useState<Chat[] | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<unknown>(null)
+
+  useEffect(() => {
+    getChats()
+      .then(res => setDataChats(res.data))
+      .catch(setError)
+      .finally(() => setLoading(false))
+  }, [])
+
+  return { dataChats, loading, error }
+}
