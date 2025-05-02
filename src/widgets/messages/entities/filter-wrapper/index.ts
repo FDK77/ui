@@ -1,1 +1,0 @@
-export { FilterWrapper } from './ui'

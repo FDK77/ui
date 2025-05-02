@@ -1,1 +1,0 @@
-export { ModalUser } from './ui'
