@@ -5,7 +5,7 @@ import { Message } from '@shared/type/message'
 import { getMessages } from '@api/requests'
 
 export const useGetMessages = (filterId: number) => {
-  const [dataMessage, setDataMessage] = useState<Message[] | null>(null)
+  const [dataMessages, setDataMessage] = useState<Message[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<unknown>(null)
 
@@ -16,5 +16,5 @@ export const useGetMessages = (filterId: number) => {
       .finally(() => setLoading(false))
   }, [])
 
-  return { dataMessage, loading, error }
+  return { dataMessages, loading, error }
 }
