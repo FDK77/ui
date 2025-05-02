@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { Chat } from '@/shared/type/chat'
+import { Chat } from '@shared/type/chat'
 
-import { getChats } from '../requests/chats'
+import { getChats } from '@api/requests'
 
 export const useGetChats = () => {
   const [dataChats, setDataChats] = useState<Chat[] | null>(null)
