@@ -19,7 +19,7 @@ export const Chat = ({ data, selected, onClick }: ChatProps) => {
       onClick={onClick}
     >
       <Avatar
-        path={data.image}
+        path={data.avatar}
         name={data.title}
       />
       <div className='info ml-2.5 flex flex-col justify-between'>
@@ -29,7 +29,7 @@ export const Chat = ({ data, selected, onClick }: ChatProps) => {
         </div>
         {/* {TODO: надо доделать на беке последнее сообщение} */}
         <Text
-          text={'Last message'}
+          text={data.lastMessage ? data.lastMessage : ''}
           opacity={!selected}
         />
       </div>
