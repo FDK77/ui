@@ -66,7 +66,10 @@ export const Messages = () => {
         >
           <div className='flex min-h-full flex-col justify-end space-y-5'>
             {dataMessages.map(message => (
-              <div className='flex items-end'>
+              <div
+                className='flex items-end'
+                key={message.id}
+              >
                 <div
                   className='cursor-pointer'
                   onClick={() => dispatch(selectUser(message.sender))}

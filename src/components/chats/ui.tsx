@@ -51,6 +51,7 @@ export const Chats = () => {
             .filter(chat => chat.title.toLowerCase().includes(search.toLowerCase()))
             .map(chat => (
               <div
+                key={chat.chatId}
                 className={`flex w-full cursor-default rounded-md px-2 py-1 ${chat.chatId === selectedChatId ? 'bg-[#766ac8]' : 'transition-colors hover:bg-[#675cad]'}`}
                 onClick={() => handleSelectChat(chat)}
               >
