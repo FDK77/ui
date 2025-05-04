@@ -38,7 +38,7 @@ export const FilterWrapper = ({ children }: { children: React.ReactNode }) => {
       >
         {selectedChatId === null && <Title title='Выберите чат' />}
         {selectedChatId !== null && filters.length === 0 && (
-          <div className='text-base font-bold text-white'>Добавите фильтр</div>
+          <div className='text-base font-bold text-white'>Вы ещё не добавили фильтры этому чату</div>
         )}
         {children}
       </div>

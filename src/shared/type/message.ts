@@ -6,4 +6,6 @@ export interface Message {
   summary: null | string
   timestamp: string
   sender: User
+  filterId: number
+  chatId: number
 }

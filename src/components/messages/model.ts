@@ -1,6 +1,8 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { useDeleteMessages } from '@/shared/api/hooks/deleteMessages'
+import { markChatAsRead } from '@/shared/redux/slices/wsMessageSlice'
+import { Message } from '@/shared/type/message'
 import { User } from '@/shared/type/user'
 
 import { useAppSelector } from '@shared/lib/hooks/useAppSelector'
@@ -13,16 +15,36 @@ import { useAppDispatch } from '@lib/hooks/useAppDispatch'
 
 export const useMessages = () => {
   const [showFullText, setShowFullText] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null) //для проматывания скролла вниз
-  const { removeMessages } = useDeleteMessages()
+  const [dataMessages, setDataMessages] = useState<Message[]>([])
+  const containerRef = useRef<HTMLDivElement>(null)
 
+  const { removeMessages } = useDeleteMessages()
   const selectedChatTitle = useAppSelector(getSelectChatTitle)
   const selectedChatImage = useAppSelector(getSelectChatAvatar)
   const selectedFilterId = useAppSelector(getSelectFilterId)
   const dispatch = useAppDispatch()
 
-  const { dataMessages } = useGetMessages(selectedFilterId ?? undefined) //TODO: Пересмотреть
+  const lastMessages = useAppSelector(state => state.ws.lastMessagesByFilterId)
+  const { dataMessages: initialMessages } = useGetMessages(selectedFilterId ?? undefined)
 
+  useEffect(() => {
+    if (selectedFilterId == null) {
+      setDataMessages([]) // очищаем, если нет фильтра
+    } else {
+      setDataMessages(initialMessages) // устанавливаем сообщения
+    }
+  }, [initialMessages, selectedFilterId])
+
+  // Добавляем новое сообщение из WebSocket
+  useEffect(() => {
+    const incoming = lastMessages[selectedFilterId ?? -1]
+    if (incoming) {
+      setDataMessages(prev => [...prev, incoming])
+      dispatch(markChatAsRead(incoming.chatId))
+    }
+  }, [lastMessages, selectedFilterId, dispatch])
+
+  // Scroll to bottom при изменении сообщений
   useLayoutEffect(() => {
     const container = containerRef.current
     if (container) {
@@ -31,21 +53,9 @@ export const useMessages = () => {
   }, [dataMessages])
 
   const handleToggleText = () => setShowFullText(prev => !prev)
-
-  const handleSettingsClick = () => {
-    dispatch(openSettingsModal())
-  }
-  const handleUser = (user: User) => {
-    dispatch(selectUser(user))
-  }
-
-  const deleteMessage = (filterId: number) => {
-    removeMessages(filterId)
-  }
-
-  const handelDelete = (filterId: number) => {
-    deleteMessage(filterId)
-  }
+  const handleSettingsClick = () => dispatch(openSettingsModal())
+  const handleUser = (user: User) => dispatch(selectUser(user))
+  const handelDelete = (filterId: number) => removeMessages(filterId)
 
   function formatDateToRussian(timestamp: string): string {
     const months = [
@@ -62,24 +72,14 @@ export const useMessages = () => {
       'ноября',
       'декабря'
     ]
-
-    // Преобразуем в ISO-совместимый формат и указываем что это UTC
     const utcString = timestamp.replace(' ', 'T') + 'Z'
     const date = new Date(utcString)
-
-    const day = date.getDate()
-    const month = months[date.getMonth()]
-
-    return `${day} ${month}`
+    return `${date.getDate()} ${months[date.getMonth()]}`
   }
 
   function extractTime(timestamp: string): string {
-    // Преобразуем строку вида 'YYYY-MM-DD HH:mm' в ISO-совместимую строку
-    const utcString = timestamp.replace(' ', 'T') + 'Z' // Добавляем 'Z' — указание на UTC
-
+    const utcString = timestamp.replace(' ', 'T') + 'Z'
     const date = new Date(utcString)
-
-    // Получаем локальное время (часы и минуты)
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   }
 

@@ -1,7 +1,5 @@
 import { FilterWrapper } from '@components/filter-wrapper'
 
-import { selectUser } from '@shared/redux/slices'
-
 import { Avatar } from '@ui/avatar'
 import { Title } from '@ui/title'
 
@@ -57,12 +55,14 @@ export const Messages = () => {
           className='h-full overflow-y-auto'
           style={{ scrollbarWidth: 'thin', scrollbarColor: '#3c3c3c transparent' }}
         >
-          <button
-            className='absolute top-10 right-10 cursor-pointer'
-            onClick={() => handelDelete(selectedFilterId)}
-          >
-            <DeleteIcon />
-          </button>
+          {selectedFilterId && (
+            <button
+              className='absolute top-10 right-10 cursor-pointer'
+              onClick={() => handelDelete(selectedFilterId)}
+            >
+              <DeleteIcon />
+            </button>
+          )}
 
           <div className='flex min-h-full flex-col justify-end space-y-5'>
             {dataMessages.map(message => {

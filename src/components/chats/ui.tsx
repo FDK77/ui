@@ -18,6 +18,7 @@ export const Chats = () => {
   const dispatch = useAppDispatch()
   const search = useAppSelector(state => state.search.search)
   const selectedChatId = useAppSelector(getSelectChatId)
+  const newMessages = useAppSelector(state => state.ws.newMessagesByChatId)
 
   const { dataChats } = useGetChats()
 
@@ -60,13 +61,18 @@ export const Chats = () => {
                   name={chat.title}
                 />
                 <div className='info ml-2.5 flex flex-col justify-between'>
-                  <div className='flex space-x-1'>
-                    {chat.type === 'CHANNEL' ? (
-                      <MegaphoneIcon />
-                    ) : (
-                      chat.type === 'CHAT' && <GroupIcon />
-                    )}
-                    <Title title={chat.title} />
+                  <div className=''>
+                    <div className='flex space-x-1'>
+                      {chat.type === 'CHANNEL' ? (
+                        <MegaphoneIcon />
+                      ) : (
+                        chat.type === 'CHAT' && <GroupIcon />
+                      )}
+                      <Title title={chat.title} />
+                      {newMessages[chat.chatId] && (
+                        <div className='ml-auto h-2 w-2 rounded-full bg-red-500' />
+                      )}
+                    </div>
                   </div>
                   <Text
                     text={chat.lastMessage ? chat.lastMessage : ''}

@@ -9,8 +9,6 @@ export const useGetMessages = (filterId: number | undefined) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<unknown>(null)
 
-  console.log('запрос', filterId)
-
   useEffect(() => {
     if (filterId == null) return
 

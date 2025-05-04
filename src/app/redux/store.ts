@@ -8,6 +8,7 @@ import {
   modalSettingsFiltersSlice,
   searchSlice
 } from '@shared/redux/slices'
+import wsMessageSlice from '@/shared/redux/slices/wsMessageSlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     chat: chatSlice.reducer,
     filter: filterSlice.reducer,
     user: userSlice.reducer,
-    modalSettingsFilters: modalSettingsFiltersSlice.reducer
+    modalSettingsFilters: modalSettingsFiltersSlice.reducer,
+    ws: wsMessageSlice
 
     // settingsModal: settingsModalSlice.reducer,
     // confirmModal: confirmModalSlice.reducer
