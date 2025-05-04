@@ -1,9 +1,24 @@
 import { RootState } from '@/app/redux/store'
 
-export const getSelectFilter = (state: RootState) => state.filter
+// Получить весь слайс фильтров
+export const getSelectFilterState = (state: RootState) => state.filter
 
-export const getSelectFilterId = (state: RootState) => state.filter.id
-export const getSelectFilterName = (state: RootState) => state.filter.name
-export const getSelectFilterValue = (state: RootState) => state.filter.value
-export const getSelectFilterSummary = (state: RootState) => state.filter.summary
-export const getSelectFilterColor = (state: RootState) => state.filter.color
+// Получить список всех фильтров
+export const getSelectFilters = (state: RootState) => state.filter.filters
+
+// Получить ID выбранного фильтра
+export const getSelectFilterId = (state: RootState) => state.filter.selectedFilterId
+
+// Получить активный фильтр (объект)
+export const getSelectedFilter = (state: RootState) => {
+  const { filters, selectedFilterId } = state.filter
+  return filters.find(f => f.id === selectedFilterId) ?? null
+}
+
+// Получить отдельные поля активного фильтра
+export const getSelectFilterName = (state: RootState) => getSelectedFilter(state)?.name ?? ''
+export const getSelectFilterValue = (state: RootState) => getSelectedFilter(state)?.value ?? ''
+export const getSelectFilterSummary = (state: RootState) =>
+  getSelectedFilter(state)?.summary ?? false
+export const getSelectFilterColor = (state: RootState) =>
+  getSelectedFilter(state)?.color ?? '#000000'

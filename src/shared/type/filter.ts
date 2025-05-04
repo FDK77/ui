@@ -1,5 +1,5 @@
 export interface Filter {
-  id?: number
+  id: number | null
   name: string
   value: string
   color: string

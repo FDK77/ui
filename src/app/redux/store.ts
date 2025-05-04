@@ -2,18 +2,20 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import { userSlice } from '@/shared/redux/slices/userSlice'
 
-// import { settingsModalSlice } from '@/widgets/messages/entities/message-header'
-// import { modalUserSlice } from '@/widgets/messages/entities/modal-user/slice'
-// import { confirmModalSlice } from '@/widgets/messages/features/confirm-modal/slice'
-
-import { chatSlice, filterSlice, searchSlice } from '@shared/redux/slices'
+import {
+  chatSlice,
+  filterSlice,
+  modalSettingsFiltersSlice,
+  searchSlice
+} from '@shared/redux/slices'
 
 export const store = configureStore({
   reducer: {
     search: searchSlice.reducer,
     chat: chatSlice.reducer,
     filter: filterSlice.reducer,
-    user: userSlice.reducer
+    user: userSlice.reducer,
+    modalSettingsFilters: modalSettingsFiltersSlice.reducer
 
     // settingsModal: settingsModalSlice.reducer,
     // confirmModal: confirmModalSlice.reducer

@@ -1,7 +1,7 @@
 import { Filter } from './filter'
 
 export interface Chat {
-  chatId: number
+  chatId: number | null
   title: string
   avatar: null | string
   filters: Filter[]

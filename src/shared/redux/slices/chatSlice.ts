@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Chat } from '@/shared/type/chat'
 
 const initialState: Chat = {
-  chatId: 0,
+  chatId: null,
   title: '',
   type: 'USER',
   filters: [{ id: 0, name: '', color: '', value: '', summary: false }],

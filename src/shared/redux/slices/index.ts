@@ -1,3 +1,5 @@
 export * from './chatSlice'
 export * from './searchSlice'
 export * from './filterSlice'
+export * from './settingsFiltersSlice'
+export * from './userSlice'
