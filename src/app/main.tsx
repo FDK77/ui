@@ -10,10 +10,10 @@ async function deferRender() {
   const { worker } = await import('../shared/api/msw.ts')
   return worker.start()
 }
-//deferRender().then(() => {
+deferRender().then(() => {
   createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
       <App />
     </Provider>
   )
-//})
+})

@@ -1,23 +1,24 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-import { useDeleteMessages } from '@/shared/api/hooks/deleteMessages'
-import { markChatAsRead } from '@/shared/redux/slices/wsMessageSlice'
-import { Message } from '@/shared/type/message'
-import { User } from '@/shared/type/user'
-
-import { useAppSelector } from '@shared/lib/hooks/useAppSelector'
 import { getSelectChatAvatar, getSelectChatTitle, getSelectFilterId } from '@shared/redux/selectors'
 import { openSettingsModal, selectUser } from '@shared/redux/slices'
+import { markChatAsRead } from '@shared/redux/slices/wsMessageSlice'
+import { Message } from '@shared/type/message'
+import { User } from '@shared/type/user'
 
+import { useDeleteMessages } from '@api/hooks/deleteMessages'
 import { useGetMessages } from '@api/hooks/useGetMessages'
 
 import { useAppDispatch } from '@lib/hooks/useAppDispatch'
+import { useAppSelector } from '@lib/hooks/useAppSelector'
+import { useConfirm } from '@lib/hooks/useConfirm'
 
 export const useMessages = () => {
   const [showFullText, setShowFullText] = useState(false)
   const [dataMessages, setDataMessages] = useState<Message[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
 
+  const { open: openConfirm } = useConfirm()
   const { removeMessages } = useDeleteMessages()
   const selectedChatTitle = useAppSelector(getSelectChatTitle)
   const selectedChatImage = useAppSelector(getSelectChatAvatar)
@@ -27,7 +28,7 @@ export const useMessages = () => {
   const lastMessages = useAppSelector(state => state.ws.lastMessagesByFilterId)
   const { dataMessages: initialMessages } = useGetMessages(selectedFilterId ?? undefined)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (selectedFilterId == null) {
       setDataMessages([]) // очищаем, если нет фильтра
     } else {
@@ -55,7 +56,9 @@ export const useMessages = () => {
   const handleToggleText = () => setShowFullText(prev => !prev)
   const handleSettingsClick = () => dispatch(openSettingsModal())
   const handleUser = (user: User) => dispatch(selectUser(user))
-  const handelDelete = (filterId: number) => removeMessages(filterId)
+  const handelDelete = (filterId: number) => {
+    openConfirm('Вы действительно хотите удалить все сообщения?', () => removeMessages(filterId))
+  }
 
   function formatDateToRussian(timestamp: string): string {
     const months = [

@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { User } from '@shared/type/user'
 
-const initialState: User = {
-  userId: 0,
-  username: '',
-  displayName: '',
-  phoneNumber: null,
-  avatarPath: null
+interface UserState {
+  user: User | null
+  isOpen: boolean
+}
+
+const initialState: UserState = {
+  user: null,
+  isOpen: false
 }
 
 export const userSlice = createSlice({
@@ -15,9 +17,13 @@ export const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     selectUser: (state, action: PayloadAction<User>) => {
-      return { ...state, ...action.payload }
+      state.user = action.payload
+      state.isOpen = true
     },
-    unselectUser: () => initialState
+    unselectUser: state => {
+      state.user = null
+      state.isOpen = false
+    }
   }
 })
 

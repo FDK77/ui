@@ -4,6 +4,7 @@ import { useSendFilters } from '@/shared/api/hooks/useSendFilters'
 import { IFilter } from '@/shared/const/IFilter'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch'
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector'
+import { useConfirm } from '@/shared/lib/hooks/useConfirm'
 import { getSelectFilters } from '@/shared/redux/selectors/filter'
 import { closeSettingsModal } from '@/shared/redux/slices'
 import { setFilters } from '@/shared/redux/slices/filterSlice'
@@ -17,6 +18,7 @@ export const useSendSettings = () => {
   const dispatch = useAppDispatch()
 
   const { sendFilters } = useSendFilters()
+  const { open: openConfirm } = useConfirm()
 
   const [localFilters, setLocalFilters] = useState<Filter[]>(filters)
   const [nameOverLong, setNameOverLong] = useState(false)
@@ -67,13 +69,9 @@ export const useSendSettings = () => {
   const handleDeleteFilter = (index: number) => {
     const filterName = localFilters[index]?.name || `фильтр #${index + 1}`
 
-    //   dispatch(
-    //     openConfirmModal({
-    //       message: `Вы действительно хотите удалить "${filterName}"?`,
-    // onConfirm: () =>
-    setLocalFilters(prev => prev.filter((_, i) => i !== index))
-    // })
-    //   )
+    openConfirm(`Вы действительно хотите удалить "${filterName}"?`, () =>
+      setLocalFilters(prev => prev.filter((_, i) => i !== index))
+    )
   }
 
   const handleClose = () => {

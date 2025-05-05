@@ -1,6 +1,8 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+
 import { FilterWrapper } from '@components/filter-wrapper'
 
-import { Avatar } from '@ui/avatar'
+// import { Avatar } from '@ui/avatar'
 import { Title } from '@ui/title'
 
 import { DeleteIcon } from './assets/delete-icon'
@@ -31,10 +33,15 @@ export const Messages = () => {
       <div className='relative flex h-15 w-full items-center justify-center bg-[#212121]'>
         {selectedChatTitle && (
           <>
-            <Avatar
+            <Avatar>
+              <AvatarImage src={`http://localhost:5000/avatars/${selectedChatImage}`} />
+              <AvatarFallback>{selectedChatTitle}</AvatarFallback>
+            </Avatar>
+
+            {/* <Avatar
               path={selectedChatImage}
               name={selectedChatTitle}
-            />
+            /> */}
             <Title
               title={selectedChatTitle}
               className='ml-2.5'
@@ -82,10 +89,14 @@ export const Messages = () => {
                       className='cursor-pointer'
                       onClick={() => handleUser(message.sender)}
                     >
-                      <Avatar
+                      <Avatar>
+                        <AvatarImage src={`http://localhost:5000/avatars/${selectedChatImage}`} />
+                        <AvatarFallback>{selectedChatTitle}</AvatarFallback>
+                      </Avatar>
+                      {/* <Avatar
                         path={message.sender.avatarPath}
                         name={message.sender.displayName}
-                      />
+                      /> */}
                     </div>
                     <div className='relative ml-1 max-w-xl rounded-t-md rounded-br-md bg-[#212121] p-2.5'>
                       <TailIcon className='absolute bottom-0 -left-1.5' />

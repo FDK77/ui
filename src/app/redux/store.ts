@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { userSlice } from '@/shared/redux/slices/userSlice'
+import wsMessageSlice from '@/shared/redux/slices/wsMessageSlice'
 
 import {
   chatSlice,
+  confirmModalSlice,
   filterSlice,
   modalSettingsFiltersSlice,
   searchSlice
 } from '@shared/redux/slices'
-import wsMessageSlice from '@/shared/redux/slices/wsMessageSlice'
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     filter: filterSlice.reducer,
     user: userSlice.reducer,
     modalSettingsFilters: modalSettingsFiltersSlice.reducer,
-    ws: wsMessageSlice
+    ws: wsMessageSlice,
+    confirmModal: confirmModalSlice.reducer
 
     // settingsModal: settingsModalSlice.reducer,
     // confirmModal: confirmModalSlice.reducer
