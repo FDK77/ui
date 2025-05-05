@@ -34,7 +34,7 @@ export const Messages = () => {
         {selectedChatTitle && (
           <>
             <Avatar>
-              <AvatarImage src={`http://localhost:5000/avatars/${selectedChatImage}`} />
+              <AvatarImage src={`http://localhost:8080/avatars/${selectedChatImage}`} />
               <AvatarFallback>{selectedChatTitle}</AvatarFallback>
             </Avatar>
 
@@ -90,7 +90,9 @@ export const Messages = () => {
                       onClick={() => handleUser(message.sender)}
                     >
                       <Avatar>
-                        <AvatarImage src={`http://localhost:5000/avatars/${selectedChatImage}`} />
+                        <AvatarImage
+                          src={`http://localhost:8080/avatars/${message.sender.avatarPath}`}
+                        />
                         <AvatarFallback>{selectedChatTitle}</AvatarFallback>
                       </Avatar>
                       {/* <Avatar

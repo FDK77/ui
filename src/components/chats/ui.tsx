@@ -1,3 +1,5 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+
 import { getSelectChatId } from '@shared/redux/selectors'
 import { selectChat, selectSearch } from '@shared/redux/slices'
 import { Chat } from '@shared/type/chat'
@@ -7,7 +9,6 @@ import { useGetChats } from '@api/hooks'
 import { useAppDispatch } from '@lib/hooks/useAppDispatch'
 import { useAppSelector } from '@lib/hooks/useAppSelector'
 
-import { Avatar } from '@ui/avatar'
 import { Text } from '@ui/text'
 import { Title } from '@ui/title'
 
@@ -56,10 +57,10 @@ export const Chats = () => {
                 className={`flex w-full cursor-default rounded-md px-2 py-1 ${chat.chatId === selectedChatId ? 'bg-[#766ac8]' : 'transition-colors hover:bg-[#675cad]'}`}
                 onClick={() => handleSelectChat(chat)}
               >
-                <Avatar
-                  path={chat.avatar}
-                  name={chat.title}
-                />
+                <Avatar>
+                  <AvatarImage src={`http://localhost:8080/avatars/${chat.avatar}`} />
+                  <AvatarFallback>{chat.title}</AvatarFallback>
+                </Avatar>
                 <div className='info ml-2.5 flex w-full flex-col justify-between'>
                   <div className='flex items-center justify-between'>
                     <div className='flex space-x-1'>

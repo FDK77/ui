@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { Message } from '@/shared/type/message'
 
 interface WsState {

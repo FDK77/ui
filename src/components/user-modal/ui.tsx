@@ -1,4 +1,4 @@
-import { Avatar } from '@/shared/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Text } from '@/shared/ui/text'
 import { Title } from '@/shared/ui/title'
 
@@ -31,10 +31,11 @@ export const ModalUser = () => {
             </button>
           </div>
           <div className='mt-5 flex items-center gap-2.5'>
-            <Avatar
-              name={selectUser.displayName}
-              path={selectUser.avatarPath}
-            />
+            <Avatar>
+              <AvatarImage src={`http://localhost:8080/avatars/${selectUser.avatarPath}`} />
+              <AvatarFallback>{selectUser.displayName}</AvatarFallback>
+            </Avatar>
+
             <Title title={selectUser.displayName} />
           </div>
         </div>
