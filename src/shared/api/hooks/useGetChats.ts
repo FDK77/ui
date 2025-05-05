@@ -5,7 +5,7 @@ import { Chat } from '@shared/type/chat'
 import { getChats } from '@api/requests'
 
 export const useGetChats = () => {
-  const [dataChats, setDataChats] = useState<Chat[] | null>(null)
+  const [dataChats, setDataChats] = useState<Chat[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<unknown>(null)
 

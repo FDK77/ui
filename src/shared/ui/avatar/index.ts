@@ -1,0 +1,1 @@
+export { ProcedureAvatar } from './ui'

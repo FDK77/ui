@@ -8,7 +8,7 @@ import { useFilterWrapper } from './modal'
 export const FilterWrapper = ({ children }: { children: React.ReactNode }) => {
   const { filters, selectedFilterColor, selectedChatId, handleSelectChat, selectedFilterId } =
     useFilterWrapper()
-  const newMessages = useAppSelector(state => state.ws.lastMessagesByFilterId)
+  const unreadByChat = useAppSelector(state => state.ws.unreadFilterIdsByChatId)
 
   return (
     <div
@@ -32,7 +32,9 @@ export const FilterWrapper = ({ children }: { children: React.ReactNode }) => {
               text={filter.name}
               opacity={!(filter.id === selectedFilterId)}
             />
-            {newMessages[filter.id] && <div className='ml-auto h-2 w-2 rounded-full bg-white' />}
+            {unreadByChat[selectedChatId]?.includes(filter.id) && (
+              <div className='ml-auto h-2 w-2 rounded-full bg-white' />
+            )}
           </div>
         ))}
       </div>

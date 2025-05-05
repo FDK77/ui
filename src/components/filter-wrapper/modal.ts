@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import { markFilterAsRead } from '@/shared/redux/slices/wsMessageSlice'
+
 import {
   getSelectChatId,
   getSelectFilterColor,
@@ -25,6 +27,7 @@ export const useFilterWrapper = () => {
 
   const handleSelectChat = (filter: Filter) => {
     dispatch(selectFilter(filter.id))
+    dispatch(markFilterAsRead({ chatId: selectedChatId, filterId: filter.id }))
   }
 
   useEffect(() => {
@@ -36,6 +39,7 @@ export const useFilterWrapper = () => {
     // выбираем первый фильтр по умолчанию
     if (dataFilters[0]) {
       dispatch(selectFilter(dataFilters[0].id))
+      dispatch(markFilterAsRead({ chatId: selectedChatId, filterId: dataFilters[0].id }))
     } else {
       dispatch(selectFilter(null))
     }

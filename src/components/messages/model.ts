@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { getSelectChatAvatar, getSelectChatTitle, getSelectFilterId } from '@shared/redux/selectors'
 import { openSettingsModal, selectUser } from '@shared/redux/slices'
-import { markChatAsRead } from '@shared/redux/slices/wsMessageSlice'
 import { Message } from '@shared/type/message'
 import { User } from '@shared/type/user'
 
@@ -39,11 +38,15 @@ export const useMessages = () => {
   // Добавляем новое сообщение из WebSocket
   useEffect(() => {
     const incoming = lastMessages[selectedFilterId ?? -1]
-    if (incoming) {
-      setDataMessages(prev => [...prev, incoming])
-      dispatch(markChatAsRead(incoming.chatId))
+
+    if (incoming && incoming.filterId === selectedFilterId) {
+      setDataMessages(prev => {
+        // предотвращаем дублирование по id
+        if (prev.some(msg => msg.id === incoming.id)) return prev
+        return [...prev, incoming]
+      })
     }
-  }, [lastMessages, selectedFilterId, dispatch])
+  }, [lastMessages, selectedFilterId])
 
   // Scroll to bottom при изменении сообщений
   useLayoutEffect(() => {
@@ -57,7 +60,10 @@ export const useMessages = () => {
   const handleSettingsClick = () => dispatch(openSettingsModal())
   const handleUser = (user: User) => dispatch(selectUser(user))
   const handelDelete = (filterId: number) => {
-    openConfirm('Вы действительно хотите удалить все сообщения?', () => removeMessages(filterId))
+    openConfirm('Вы действительно хотите удалить все сообщения?', async () => {
+      await removeMessages(filterId)
+      setDataMessages([])
+    })
   }
 
   function formatDateToRussian(timestamp: string): string {
