@@ -1,3 +1,5 @@
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector'
+
 import { Text } from '@ui/text'
 import { Title } from '@ui/title'
 
@@ -6,6 +8,7 @@ import { useFilterWrapper } from './modal'
 export const FilterWrapper = ({ children }: { children: React.ReactNode }) => {
   const { filters, selectedFilterColor, selectedChatId, handleSelectChat, selectedFilterId } =
     useFilterWrapper()
+  const newMessages = useAppSelector(state => state.ws.lastMessagesByFilterId)
 
   return (
     <div
@@ -29,6 +32,7 @@ export const FilterWrapper = ({ children }: { children: React.ReactNode }) => {
               text={filter.name}
               opacity={!(filter.id === selectedFilterId)}
             />
+            {newMessages[filter.id] && <div className='ml-auto h-2 w-2 rounded-full bg-white' />}
           </div>
         ))}
       </div>
@@ -38,7 +42,9 @@ export const FilterWrapper = ({ children }: { children: React.ReactNode }) => {
       >
         {selectedChatId === null && <Title title='Выберите чат' />}
         {selectedChatId !== null && filters.length === 0 && (
-          <div className='text-base font-bold text-white'>Вы ещё не добавили фильтры этому чату</div>
+          <div className='text-base font-bold text-white'>
+            Вы ещё не добавили фильтры этому чату
+          </div>
         )}
         {children}
       </div>

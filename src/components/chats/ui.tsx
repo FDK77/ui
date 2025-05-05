@@ -60,8 +60,8 @@ export const Chats = () => {
                   path={chat.avatar}
                   name={chat.title}
                 />
-                <div className='info ml-2.5 flex flex-col justify-between'>
-                  <div className=''>
+                <div className='info ml-2.5 flex w-full flex-col justify-between'>
+                  <div className='flex items-center justify-between'>
                     <div className='flex space-x-1'>
                       {chat.type === 'CHANNEL' ? (
                         <MegaphoneIcon />
@@ -69,10 +69,10 @@ export const Chats = () => {
                         chat.type === 'CHAT' && <GroupIcon />
                       )}
                       <Title title={chat.title} />
-                      {newMessages[chat.chatId] && (
-                        <div className='ml-auto h-2 w-2 rounded-full bg-red-500' />
-                      )}
                     </div>
+                    {newMessages[chat.chatId] && (
+                      <div className='ml-auto h-2 w-2 rounded-full bg-white' />
+                    )}
                   </div>
                   <Text
                     text={chat.lastMessage ? chat.lastMessage : ''}
