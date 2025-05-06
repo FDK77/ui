@@ -4,11 +4,13 @@ import { Message } from '@/shared/type/message'
 
 interface WsState {
   lastMessagesByFilterId: Record<number, Message>
+  lastMessagesByChatId: Record<number, Message>
   unreadFilterIdsByChatId: Record<number, number[]> // chatId → [filterId, ...]
 }
 
 const initialState: WsState = {
   lastMessagesByFilterId: {},
+  lastMessagesByChatId: {},
   unreadFilterIdsByChatId: {}
 }
 
@@ -20,6 +22,7 @@ export const wsMessageSlice = createSlice({
       const { message: msg, currentFilterId } = action.payload
 
       state.lastMessagesByFilterId[msg.filterId] = msg
+      state.lastMessagesByChatId[msg.chatId] = msg
 
       if (currentFilterId === msg.filterId) {
         return

@@ -6,7 +6,6 @@ const initialState: Chat = {
   chatId: null,
   title: '',
   type: 'USER',
-  filters: [{ id: 0, name: '', color: '', value: '', summary: false }],
   lastMessage: '',
   avatar: null
 }
