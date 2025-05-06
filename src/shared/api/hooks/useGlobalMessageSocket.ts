@@ -10,8 +10,8 @@ import { Message } from '@/shared/type/message'
 import { useAppDispatch } from '@lib/hooks/useAppDispatch'
 
 export const useGlobalMessageSocket = () => {
-  const selectedFilterId = useAppSelector(state => state.filter.selectedFilterId)
   const dispatch = useAppDispatch()
+  const selectedFilterId = useAppSelector(state => state.filter.selectedFilterId)
 
   useEffect(() => {
     const socket = new SockJS('http://localhost:8080/ws')
@@ -24,11 +24,12 @@ export const useGlobalMessageSocket = () => {
     client.onConnect = () => {
       client.subscribe('/topic/messages', message => {
         const parsed: Message = JSON.parse(message.body)
-        dispatch(messageReceived(parsed, selectedFilterId))
+
+        dispatch(messageReceived({ message: parsed, currentFilterId: selectedFilterId }))
       })
     }
 
     client.activate()
     return () => void client.deactivate()
-  }, [dispatch])
+  }, [dispatch, selectedFilterId])
 }
