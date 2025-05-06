@@ -1,12 +1,13 @@
-import { IChat } from '../const/IChat'
+import { Chat } from '../type/chat'
 
-export const CHAT_LIST: IChat[] = [
+export const CHAT_LIST: Chat[] = [
   {
     chatId: 759044099,
     title: 'Jo Jo',
     type: 'USER',
     filters: [],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 1002118607,
@@ -16,14 +17,16 @@ export const CHAT_LIST: IChat[] = [
       { id: 1, name: 'aboba', color: '#FFEA00', value: 'asdfdsfqfdsq', summary: false },
       { id: 2, name: 'aboba', color: '#2BFF00', value: 'asdfdsfqfdsq', summary: true }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 1001166672,
     title: 'Москва сейчас',
     type: 'CHANNEL',
     filters: [],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 1001849391,
@@ -35,7 +38,8 @@ export const CHAT_LIST: IChat[] = [
       { id: 3, name: 'Filter 3', color: '#8800FF', value: 'Text for filter 3', summary: false },
       { id: 4, name: 'Filter 4', color: '#FF00DD', value: 'Text for filter 4', summary: true }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 428317541,
@@ -44,7 +48,8 @@ export const CHAT_LIST: IChat[] = [
     filters: [
       { id: 1, name: 'Filter 1', color: '#FF0000', value: 'Text for filter 1', summary: false }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 123456789,
@@ -57,7 +62,8 @@ export const CHAT_LIST: IChat[] = [
       { id: 4, name: 'Filter 4', color: '#00D9FF', value: 'Text for filter 4', summary: false },
       { id: 5, name: 'Filter 5', color: '#0048FF', value: 'Text for filter 5', summary: true }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 987654321,
@@ -66,7 +72,8 @@ export const CHAT_LIST: IChat[] = [
     filters: [
       { id: 1, name: 'Filter 1', color: '#8800FF', value: 'Text for filter 1', summary: true }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 555666777,
@@ -77,7 +84,8 @@ export const CHAT_LIST: IChat[] = [
       { id: 2, name: 'Filter 2', color: '#FF0000', value: 'Text for filter 2', summary: false },
       { id: 3, name: 'Filter 3', color: '#FF9500', value: 'Text for filter 3', summary: true }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 111222333,
@@ -87,7 +95,8 @@ export const CHAT_LIST: IChat[] = [
       { id: 1, name: 'Filter 1', color: '#FFEA00', value: 'Text for filter 1', summary: false },
       { id: 2, name: 'Filter 2', color: '#2BFF00', value: 'Text for filter 2', summary: true }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 444555666,
@@ -97,7 +106,8 @@ export const CHAT_LIST: IChat[] = [
       { id: 1, name: 'Filter 1', color: '#00D9FF', value: 'Text for filter 1', summary: true },
       { id: 2, name: 'Filter 2', color: '#0048FF', value: 'Text for filter 2', summary: false }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 777888999,
@@ -108,7 +118,8 @@ export const CHAT_LIST: IChat[] = [
       { id: 2, name: 'Filter 2', color: '#FF00DD', value: 'Text for filter 2', summary: false },
       { id: 3, name: 'Filter 3', color: '#FF0000', value: 'Text for filter 3', summary: true }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 222333444,
@@ -117,7 +128,8 @@ export const CHAT_LIST: IChat[] = [
     filters: [
       { id: 1, name: 'Filter 1', color: '#FF9500', value: 'Text for filter 1', summary: false }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   },
   {
     chatId: 888999000,
@@ -127,6 +139,7 @@ export const CHAT_LIST: IChat[] = [
       { id: 1, name: 'Filter 1', color: '#FFEA00', value: 'Text for filter 1', summary: false },
       { id: 2, name: 'Filter 2', color: '#2BFF00', value: 'Text for filter 2', summary: true }
     ],
-    image: null
+    avatar: null,
+    lastMessage: 'aboba'
   }
 ]

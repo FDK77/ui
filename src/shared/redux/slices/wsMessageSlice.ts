@@ -16,9 +16,14 @@ export const wsMessageSlice = createSlice({
   name: 'ws',
   initialState,
   reducers: {
-    messageReceived(state, action: PayloadAction<Message>) {
-      const msg = action.payload
+    messageReceived(state, action: PayloadAction<{ message: Message; currentFilterId: number }>) {
+      const { message: msg, currentFilterId } = action.payload
+
       state.lastMessagesByFilterId[msg.filterId] = msg
+
+      if (currentFilterId === msg.filterId) {
+        return
+      }
 
       const existing = state.unreadFilterIdsByChatId[msg.chatId] ?? []
       if (!existing.includes(msg.filterId)) {

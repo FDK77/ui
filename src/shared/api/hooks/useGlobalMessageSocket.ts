@@ -1,11 +1,16 @@
 import { useEffect } from 'react'
+
 import { Client } from '@stomp/stompjs'
 import SockJS from 'sockjs-client/dist/sockjs'
-import { useAppDispatch } from '@lib/hooks/useAppDispatch'
+
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector'
 import { messageReceived } from '@/shared/redux/slices/wsMessageSlice'
 import { Message } from '@/shared/type/message'
 
+import { useAppDispatch } from '@lib/hooks/useAppDispatch'
+
 export const useGlobalMessageSocket = () => {
+  const selectedFilterId = useAppSelector(state => state.filter.selectedFilterId)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -19,7 +24,7 @@ export const useGlobalMessageSocket = () => {
     client.onConnect = () => {
       client.subscribe('/topic/messages', message => {
         const parsed: Message = JSON.parse(message.body)
-        dispatch(messageReceived(parsed))
+        dispatch(messageReceived(parsed, selectedFilterId))
       })
     }
 

@@ -91,7 +91,7 @@ export const Chats = () => {
                 </div>
                 <Text
                   text={chat.lastMessage ? chat.lastMessage : ''}
-                  opacity={chat.chatId === selectedChatId}
+                  opacity={!(chat.chatId === selectedChatId)}
                 />
               </div>
             </div>
