@@ -1,4 +1,4 @@
-import { Chat } from '../type/chat'
+import { Chat } from '../types/chat'
 
 export const CHAT_LIST: Chat[] = [
   {
@@ -7,7 +7,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'USER',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: false
+    unreadMessages: false
   },
   {
     chatId: 1002118607,
@@ -15,7 +15,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'CHANNEL',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: false
+    unreadMessages: false
   },
   {
     chatId: 1001166672,
@@ -23,14 +23,14 @@ export const CHAT_LIST: Chat[] = [
     type: 'CHANNEL',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: true
+    unreadMessages: true
   },
   {
     chatId: 1001849391,
     title: 'Общежитие №3',
     type: 'CHAT',
     avatar: null,
-    ureadMessages: true,
+    unreadMessages: true,
     lastMessage: 'aboba'
   },
   {
@@ -39,7 +39,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'CHAT',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: true
+    unreadMessages: true
   },
   {
     chatId: 123456789,
@@ -47,7 +47,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'CHANNEL',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: false
+    unreadMessages: false
   },
   {
     chatId: 987654321,
@@ -55,7 +55,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'USER',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: false
+    unreadMessages: false
   },
   {
     chatId: 555666777,
@@ -63,7 +63,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'CHAT',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: true
+    unreadMessages: true
   },
   {
     chatId: 111222333,
@@ -71,7 +71,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'CHANNEL',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: true
+    unreadMessages: true
   },
   {
     chatId: 444555666,
@@ -79,7 +79,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'USER',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: false
+    unreadMessages: false
   },
   {
     chatId: 777888999,
@@ -87,7 +87,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'CHAT',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: true
+    unreadMessages: true
   },
   {
     chatId: 222333444,
@@ -95,7 +95,7 @@ export const CHAT_LIST: Chat[] = [
     type: 'CHANNEL',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: false
+    unreadMessages: false
   },
   {
     chatId: 888999000,
@@ -103,6 +103,6 @@ export const CHAT_LIST: Chat[] = [
     type: 'USER',
     avatar: null,
     lastMessage: 'aboba',
-    ureadMessages: false
+    unreadMessages: false
   }
 ]

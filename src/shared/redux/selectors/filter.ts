@@ -22,3 +22,6 @@ export const getSelectFilterSummary = (state: RootState) =>
   getSelectedFilter(state)?.summary ?? false
 export const getSelectFilterColor = (state: RootState) =>
   getSelectedFilter(state)?.color ?? '#000000'
+export const areAllFiltersRead = (state: RootState): boolean => {
+  return state.filter.filters.every(f => !f.unreadMessages)
+}

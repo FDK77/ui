@@ -21,15 +21,17 @@ export const chatListSlice = createSlice({
     },
     selectChat: (state, action: PayloadAction<number>) => {
       state.selectedChatId = action.payload
-      const chat = state.list.find(c => c.chatId === action.payload)
-      if (chat) chat.unreadMessages = false
     },
     updateChat: (state, action: PayloadAction<Chat>) => {
       const index = state.list.findIndex(c => c.chatId === action.payload.chatId)
       if (index !== -1) state.list[index] = action.payload
+    },
+    readChat: (state, action: PayloadAction<number>) => {
+      const chat = state.list.find(c => c.chatId === action.payload)
+      if (chat) chat.unreadMessages = false
     }
   }
 })
 
-export const { setChatList, selectChat, updateChat } = chatListSlice.actions
+export const { setChatList, selectChat, updateChat, readChat } = chatListSlice.actions
 export default chatListSlice.reducer

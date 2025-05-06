@@ -17,7 +17,7 @@ const handlers = [
         color: '#00D9FF',
         value: 'Text for filter 1',
         summary: false,
-        ureadMessages: true
+        unreadMessages: true
       },
       {
         id: 2,
@@ -25,7 +25,7 @@ const handlers = [
         color: '#0048FF',
         value: 'Text for filter 2',
         summary: true,
-        ureadMessages: false
+        unreadMessages: false
       },
       {
         id: 3,
@@ -33,7 +33,7 @@ const handlers = [
         color: '#8800FF',
         value: 'Text for filter 3',
         summary: false,
-        ureadMessages: true
+        unreadMessages: true
       },
       {
         id: 4,
@@ -41,7 +41,7 @@ const handlers = [
         color: '#FF00DD',
         value: 'Text for filter 4',
         summary: true,
-        ureadMessages: true
+        unreadMessages: true
       }
     ])
   }),

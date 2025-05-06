@@ -1,4 +1,7 @@
+import { useState } from 'react'
+
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector'
+import { Message } from '@/shared/types/message'
 import { ProcedureAvatar } from '@/shared/ui/avatar'
 
 import { FilterWrapper } from '@components/filter-wrapper'
@@ -23,8 +26,6 @@ export const Messages = () => {
     containerRef,
     dataMessages,
     handleUser,
-    handleToggleText,
-    showFullText,
     formatDateToRussian,
     extractTime,
     handelDelete
@@ -71,51 +72,11 @@ export const Messages = () => {
                       {currentDate}
                     </div>
                   )}
-                  <div className='flex items-end'>
-                    <div
-                      className='cursor-pointer'
-                      onClick={() => handleUser(message.sender)}
-                    >
-                      <ProcedureAvatar
-                        path={message.sender.avatarPath}
-                        name={message.sender.displayName}
-                      />
-                    </div>
-                    <div className='relative ml-1 max-w-xl rounded-t-md rounded-br-md bg-[#212121] p-2.5'>
-                      <TailIcon className='absolute bottom-0 -left-1.5' />
-                      <div className='flex flex-col gap-1 text-white'>
-                        <div className='flex items-end justify-between gap-2'>
-                          <p className='flex-1 text-sm leading-snug break-words'>
-                            {message.summary ? message.summary : message.text}
-                          </p>
-                          <span className='text-xs whitespace-nowrap opacity-50'>
-                            {extractTime(message.timestamp)}
-                          </span>
-                        </div>
-
-                        {message.summary && (
-                          <button
-                            onClick={handleToggleText}
-                            className='cursor-pointer self-start text-xs text-[#766ac8] hover:underline focus:outline-none'
-                          >
-                            {showFullText ? 'Скрыть оригинал' : 'Показать оригинал'}
-                          </button>
-                        )}
-
-                        {message.summary && (
-                          <div
-                            className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                              showFullText ? 'mt-1 max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-                            }`}
-                          >
-                            <p className='text-sm leading-snug break-words text-gray-300'>
-                              {message.text}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                  <MessageItem
+                    message={message}
+                    extractTime={extractTime}
+                    handleUser={handleUser}
+                  />
                 </div>
               )
             })}
@@ -150,5 +111,63 @@ const MessageHeader = ({
         <SettingsIcon />
       </div>
     </>
+  )
+}
+
+const MessageItem = ({
+  message,
+  extractTime,
+  handleUser
+}: {
+  message: Message
+  extractTime: (t: string) => string
+  handleUser: (user: Message['sender']) => void
+}) => {
+  const [showFullText, setShowFullText] = useState(false)
+  const handleToggleText = () => setShowFullText(prev => !prev)
+  return (
+    <div className='flex items-end'>
+      <div
+        className='cursor-pointer'
+        onClick={() => handleUser(message.sender)}
+      >
+        <ProcedureAvatar
+          path={message.sender.avatarPath}
+          name={message.sender.displayName}
+        />
+      </div>
+      <div className='relative ml-1 max-w-xl rounded-t-md rounded-br-md bg-[#212121] p-2.5'>
+        <TailIcon className='absolute bottom-0 -left-1.5' />
+        <div className='flex flex-col gap-1 text-white'>
+          <div className='flex items-end justify-between gap-2'>
+            <p className='flex-1 text-sm leading-snug break-words'>
+              {message.summary ? message.summary : message.text}
+            </p>
+            <span className='text-xs whitespace-nowrap opacity-50'>
+              {extractTime(message.timestamp)}
+            </span>
+          </div>
+
+          {message.summary && (
+            <button
+              onClick={handleToggleText}
+              className='cursor-pointer self-start text-xs text-[#766ac8] hover:underline focus:outline-none'
+            >
+              {showFullText ? 'Скрыть оригинал' : 'Показать оригинал'}
+            </button>
+          )}
+
+          {message.summary && (
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                showFullText ? 'mt-1 max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <p className='text-sm leading-snug break-words text-gray-300'>{message.text}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }

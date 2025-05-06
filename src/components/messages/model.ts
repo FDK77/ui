@@ -13,7 +13,6 @@ import { useAppSelector } from '@lib/hooks/useAppSelector'
 import { useConfirm } from '@lib/hooks/useConfirm'
 
 export const useMessages = () => {
-  const [showFullText, setShowFullText] = useState(false)
   const [dataMessages, setDataMessages] = useState<Message[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -54,7 +53,6 @@ export const useMessages = () => {
     }
   }, [dataMessages])
 
-  const handleToggleText = () => setShowFullText(prev => !prev)
   const handleSettingsClick = () => dispatch(openSettingsModal())
   const handleUser = (user: User) => dispatch(selectUser(user))
   const handelDelete = (filterId: number) => {
@@ -94,8 +92,7 @@ export const useMessages = () => {
     dataMessages,
     formatDateToRussian,
     extractTime,
-    showFullText,
-    handleToggleText,
+
     handleSettingsClick,
     selectedFilterId,
     containerRef,

@@ -21,7 +21,7 @@ export const Chats = () => {
   const dispatch = useAppDispatch()
   const search = useAppSelector(state => state.search.search)
   const chatUnread = useAppSelector(state => state.ws.unreadFilterIdsByChatId)
-  // const lastMessage = useAppSelector(state => state.ws.lastMessagesByChatId)
+  const lastMessage = useAppSelector(state => state.ws.lastMessagesByChatId)
 
   const { dataChats } = useGetChats()
 
@@ -99,7 +99,7 @@ export const Chats = () => {
                   )}
                 </div>
                 <Text
-                  text={chat.lastMessage ? chat.lastMessage : ''}
+                  text={lastMessage[chat.chatId]?.text ?? chat.lastMessage ?? ''}
                   opacity={!(chat.chatId === selectedChatId)}
                 />
               </div>
