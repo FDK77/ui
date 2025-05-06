@@ -4,5 +4,5 @@ export interface Filter {
   value: string
   color: string
   summary: boolean
-  ureadMessages: boolean
+  unreadMessages: boolean
 }

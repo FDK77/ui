@@ -3,6 +3,6 @@ export interface Chat {
   title: string
   avatar: null | string
   lastMessage: null | string
-  ureadMessages: boolean
+  unreadMessages: boolean
   type: 'USER' | 'CHAT' | 'CHANNEL'
 }

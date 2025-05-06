@@ -94,7 +94,7 @@ export const Chats = () => {
                     )}
                     <Title title={chat.title} />
                   </div>
-                  {(chat.ureadMessages || !!chatUnread[chat.chatId]) && (
+                  {(chat.unreadMessages || !!chatUnread[chat.chatId]) && (
                     <div className='ml-auto h-2 w-2 rounded-full bg-white' />
                   )}
                 </div>

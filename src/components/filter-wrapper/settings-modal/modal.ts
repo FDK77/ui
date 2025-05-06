@@ -56,7 +56,6 @@ export const useSendSettings = () => {
       id: filter.id === 0 ? null : filter.id
     }))
 
-    dispatch(setFilters(localFilters)) // обновляем Redux-состояние
     await sendFilters(chatId, normalizedFilters)
     const response = await getFilters(chatId)
     dispatch(setFilters(response.data))
@@ -66,7 +65,7 @@ export const useSendSettings = () => {
   const handleAddFilter = () => {
     setLocalFilters(prev => [
       ...prev,
-      { id: 0, name: '', value: '', summary: false, color: '', ureadMessages: false }
+      { id: 0, name: '', value: '', summary: false, color: '', unreadMessages: false }
     ])
   }
 

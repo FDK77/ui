@@ -39,7 +39,7 @@ export const FilterWrapper = ({ children }: { children: React.ReactNode }) => {
               text={filter.name}
               opacity={!(filter.id === selectedFilterId)}
             />
-            {(filter.ureadMessages || unreadByChat[selectedChatId]?.includes(filter.id)) && (
+            {(filter.unreadMessages || unreadByChat[selectedChatId]?.includes(filter.id)) && (
               <div className='ml-auto h-2 w-2 rounded-full bg-white' />
             )}
           </div>
