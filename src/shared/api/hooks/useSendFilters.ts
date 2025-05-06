@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Filter } from '@shared/type/filter'
+import { Filter } from '@shared/types/filter'
 
 import { postFilters } from '@api/requests'
 

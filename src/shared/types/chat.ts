@@ -1,7 +1,8 @@
 export interface Chat {
-  chatId: number | null
+  chatId: number
   title: string
   avatar: null | string
   lastMessage: null | string
+  ureadMessages: boolean
   type: 'USER' | 'CHAT' | 'CHANNEL'
 }

@@ -1,4 +1,4 @@
-import { Filter } from '@shared/type/filter'
+import { Filter } from '@shared/types/filter'
 
 import { api } from '@api/initance'
 

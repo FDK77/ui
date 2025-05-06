@@ -11,10 +11,38 @@ const handlers = [
   }),
   http.get('http://localhost:8080/api/filters/:id', () => {
     return HttpResponse.json([
-      { id: 1, name: 'Filter 1', color: '#00D9FF', value: 'Text for filter 1', summary: false },
-      { id: 2, name: 'Filter 2', color: '#0048FF', value: 'Text for filter 2', summary: true },
-      { id: 3, name: 'Filter 3', color: '#8800FF', value: 'Text for filter 3', summary: false },
-      { id: 4, name: 'Filter 4', color: '#FF00DD', value: 'Text for filter 4', summary: true }
+      {
+        id: 1,
+        name: 'Filter 1',
+        color: '#00D9FF',
+        value: 'Text for filter 1',
+        summary: false,
+        ureadMessages: true
+      },
+      {
+        id: 2,
+        name: 'Filter 2',
+        color: '#0048FF',
+        value: 'Text for filter 2',
+        summary: true,
+        ureadMessages: false
+      },
+      {
+        id: 3,
+        name: 'Filter 3',
+        color: '#8800FF',
+        value: 'Text for filter 3',
+        summary: false,
+        ureadMessages: true
+      },
+      {
+        id: 4,
+        name: 'Filter 4',
+        color: '#FF00DD',
+        value: 'Text for filter 4',
+        summary: true,
+        ureadMessages: true
+      }
     ])
   }),
   http.get('http://localhost:8080/api/messages/filter/:id', () => {

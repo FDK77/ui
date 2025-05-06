@@ -1,9 +1,9 @@
+import { useEffect } from 'react'
+
 import { postSync } from '@/shared/api/requests'
 import { ProcedureAvatar } from '@/shared/ui/avatar'
 
-import { getSelectChatId } from '@shared/redux/selectors'
-import { selectChat, selectSearch } from '@shared/redux/slices'
-import { Chat } from '@shared/type/chat'
+import { selectChat, selectSearch, setChatList } from '@shared/redux/slices'
 
 import { useGetChats } from '@api/hooks'
 
@@ -20,18 +20,26 @@ import { ReloadIcon } from './assets/reload-icon'
 export const Chats = () => {
   const dispatch = useAppDispatch()
   const search = useAppSelector(state => state.search.search)
-  const selectedChatId = useAppSelector(getSelectChatId)
   const chatUnread = useAppSelector(state => state.ws.unreadFilterIdsByChatId)
-  const lastMessage = useAppSelector(state => state.ws.lastMessagesByChatId)
+  // const lastMessage = useAppSelector(state => state.ws.lastMessagesByChatId)
 
   const { dataChats } = useGetChats()
+
+  useEffect(() => {
+    if (dataChats) {
+      dispatch(setChatList(dataChats))
+    }
+  }, [dataChats])
+
+  const chatList = useAppSelector(state => state.chatList.list)
+  const selectedChatId = useAppSelector(state => state.chatList.selectedChatId)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(selectSearch(e.target.value))
   }
 
-  const handleSelectChat = (chat: Chat) => {
-    dispatch(selectChat(chat))
+  const handleSelectChat = (chatId: number) => {
+    dispatch(selectChat(chatId)) // сбросит ureadMessages внутри
   }
 
   const handleUpdateChats = async () => {
@@ -63,13 +71,13 @@ export const Chats = () => {
           scrollbarColor: '#3c3c3c transparent'
         }}
       >
-        {dataChats
+        {chatList
           .filter(chat => chat.title.toLowerCase().includes(search.toLowerCase()))
           .map(chat => (
             <div
               key={chat.chatId}
               className={`flex w-full cursor-default rounded-md px-2 py-1 ${chat.chatId === selectedChatId ? 'bg-[#766ac8]' : 'transition-colors hover:bg-[#675cad]'}`}
-              onClick={() => handleSelectChat(chat)}
+              onClick={() => handleSelectChat(chat.chatId)}
             >
               <ProcedureAvatar
                 path={chat.avatar}
@@ -86,18 +94,12 @@ export const Chats = () => {
                     )}
                     <Title title={chat.title} />
                   </div>
-                  {!!chatUnread[chat.chatId] && (
+                  {(chat.ureadMessages || !!chatUnread[chat.chatId]) && (
                     <div className='ml-auto h-2 w-2 rounded-full bg-white' />
                   )}
                 </div>
                 <Text
-                  text={
-                    lastMessage[chat.chatId]
-                      ? lastMessage[chat.chatId]
-                      : chat.lastMessage
-                        ? chat.lastMessage
-                        : ''
-                  }
+                  text={chat.lastMessage ? chat.lastMessage : ''}
                   opacity={!(chat.chatId === selectedChatId)}
                 />
               </div>

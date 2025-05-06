@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Chat } from '@shared/type/chat'
+import { Chat } from '@shared/types/chat'
 
 import { getChats } from '@api/requests'
 

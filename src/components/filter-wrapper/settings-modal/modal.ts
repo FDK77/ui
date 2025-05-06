@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react'
 
 import { useSendFilters } from '@/shared/api/hooks/useSendFilters'
+import { getFilters } from '@/shared/api/requests'
 import { IFilter } from '@/shared/const/IFilter'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch'
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector'
 import { useConfirm } from '@/shared/lib/hooks/useConfirm'
 import { getSelectFilters } from '@/shared/redux/selectors/filter'
 import { closeSettingsModal } from '@/shared/redux/slices'
-import { setFilters } from '@/shared/redux/slices/filterSlice'
-import { Filter } from '@/shared/type/filter'
-
-import { getSelectChatId } from '@shared/redux/selectors'
+import { setFilters } from '@/shared/redux/slices/filtersSlice'
+import { Filter } from '@/shared/types/filter'
 
 export const useSendSettings = () => {
   const filters = useAppSelector(getSelectFilters)
-  const chatId = useAppSelector(getSelectChatId)
+  const chatId = useAppSelector(state => state.chatList.selectedChatId)
   const dispatch = useAppDispatch()
 
   const { sendFilters } = useSendFilters()
@@ -43,11 +42,6 @@ export const useSendSettings = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!chatId) {
-      alert('Чат не выбран')
-      return
-    }
-
     const hasInvalid = localFilters.some(
       filter => !filter.name.trim() || !filter.value.toString().trim()
     )
@@ -57,13 +51,23 @@ export const useSendSettings = () => {
       return
     }
 
+    const normalizedFilters = localFilters.map(filter => ({
+      ...filter,
+      id: filter.id === 0 ? null : filter.id
+    }))
+
     dispatch(setFilters(localFilters)) // обновляем Redux-состояние
-    sendFilters(chatId, localFilters)
+    await sendFilters(chatId, normalizedFilters)
+    const response = await getFilters(chatId)
+    dispatch(setFilters(response.data))
     dispatch(closeSettingsModal())
   }
 
   const handleAddFilter = () => {
-    setLocalFilters(prev => [...prev, { id: null, name: '', value: '', summary: false, color: '' }])
+    setLocalFilters(prev => [
+      ...prev,
+      { id: 0, name: '', value: '', summary: false, color: '', ureadMessages: false }
+    ])
   }
 
   const handleDeleteFilter = (index: number) => {

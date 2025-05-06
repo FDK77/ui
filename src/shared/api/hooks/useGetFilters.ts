@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Filter } from '@shared/type/filter'
+import { Filter } from '@shared/types/filter'
 
 import { getFilters } from '@api/requests'
 

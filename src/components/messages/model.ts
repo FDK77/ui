@@ -1,9 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-import { getSelectChatAvatar, getSelectChatTitle, getSelectFilterId } from '@shared/redux/selectors'
+import { getSelectFilterId } from '@shared/redux/selectors'
 import { openSettingsModal, selectUser } from '@shared/redux/slices'
-import { Message } from '@shared/type/message'
-import { User } from '@shared/type/user'
+import { Message } from '@shared/types/message'
+import { User } from '@shared/types/user'
 
 import { useDeleteMessages } from '@api/hooks/deleteMessages'
 import { useGetMessages } from '@api/hooks/useGetMessages'
@@ -19,8 +19,6 @@ export const useMessages = () => {
 
   const { open: openConfirm } = useConfirm()
   const { removeMessages } = useDeleteMessages()
-  const selectedChatTitle = useAppSelector(getSelectChatTitle)
-  const selectedChatImage = useAppSelector(getSelectChatAvatar)
   const selectedFilterId = useAppSelector(getSelectFilterId)
   const dispatch = useAppDispatch()
 
@@ -61,8 +59,8 @@ export const useMessages = () => {
   const handleUser = (user: User) => dispatch(selectUser(user))
   const handelDelete = (filterId: number) => {
     openConfirm('Вы действительно хотите удалить все сообщения?', async () => {
-      await removeMessages(filterId)
       setDataMessages([])
+      await removeMessages(filterId)
     })
   }
 
@@ -99,8 +97,6 @@ export const useMessages = () => {
     showFullText,
     handleToggleText,
     handleSettingsClick,
-    selectedChatTitle,
-    selectedChatImage,
     selectedFilterId,
     containerRef,
     handleUser,

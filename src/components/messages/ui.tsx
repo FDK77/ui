@@ -1,8 +1,10 @@
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector'
 import { ProcedureAvatar } from '@/shared/ui/avatar'
 
 import { FilterWrapper } from '@components/filter-wrapper'
 
-// import { Avatar } from '@ui/avatar'
+import { Chat } from '@shared/types/chat'
+
 import { Title } from '@ui/title'
 
 import { DeleteIcon } from './assets/delete-icon'
@@ -11,9 +13,11 @@ import { TailIcon } from './assets/tail-icon'
 import { useMessages } from './model'
 
 export const Messages = () => {
+  const selectedChat = useAppSelector(state =>
+    state.chatList.list.find(chat => chat.chatId === state.chatList.selectedChatId)
+  )
+
   const {
-    selectedChatTitle,
-    selectedChatImage,
     selectedFilterId,
     handleSettingsClick,
     containerRef,
@@ -31,24 +35,11 @@ export const Messages = () => {
   return (
     <div className='h-full w-full bg-[#212121]'>
       <div className='relative flex h-15 w-full items-center justify-center bg-[#212121]'>
-        {selectedChatTitle && (
-          <>
-            <ProcedureAvatar
-              path={selectedChatImage}
-              name={selectedChatTitle}
-            />
-
-            <Title
-              title={selectedChatTitle}
-              className='ml-2.5'
-            />
-            <div
-              className='absolute right-5 flex h-5 w-5 cursor-pointer items-center justify-center'
-              onClick={handleSettingsClick}
-            >
-              <SettingsIcon />
-            </div>
-          </>
+        {selectedChat && (
+          <MessageHeader
+            chat={selectedChat}
+            handleSettingsClick={handleSettingsClick}
+          />
         )}
       </div>
 
@@ -93,7 +84,6 @@ export const Messages = () => {
                     <div className='relative ml-1 max-w-xl rounded-t-md rounded-br-md bg-[#212121] p-2.5'>
                       <TailIcon className='absolute bottom-0 -left-1.5' />
                       <div className='flex flex-col gap-1 text-white'>
-                        {/* Summary и время */}
                         <div className='flex items-end justify-between gap-2'>
                           <p className='flex-1 text-sm leading-snug break-words'>
                             {message.summary ? message.summary : message.text}
@@ -103,7 +93,6 @@ export const Messages = () => {
                           </span>
                         </div>
 
-                        {/* Кнопка */}
                         {message.summary && (
                           <button
                             onClick={handleToggleText}
@@ -113,7 +102,6 @@ export const Messages = () => {
                           </button>
                         )}
 
-                        {/* Анимированный оригинальный текст */}
                         {message.summary && (
                           <div
                             className={`overflow-hidden transition-all duration-300 ease-in-out ${
@@ -135,5 +123,32 @@ export const Messages = () => {
         </div>
       </FilterWrapper>
     </div>
+  )
+}
+
+const MessageHeader = ({
+  chat,
+  handleSettingsClick
+}: {
+  chat: Chat
+  handleSettingsClick: () => void
+}) => {
+  return (
+    <>
+      <ProcedureAvatar
+        path={chat.avatar}
+        name={chat.title}
+      />
+      <Title
+        title={chat.title}
+        className='ml-2.5'
+      />
+      <div
+        className='absolute right-5 flex h-5 w-5 cursor-pointer items-center justify-center'
+        onClick={handleSettingsClick}
+      >
+        <SettingsIcon />
+      </div>
+    </>
   )
 }

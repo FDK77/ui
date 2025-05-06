@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Filter } from '@shared/type/filter'
+import { Filter } from '@shared/types/filter'
 
 interface FilterState {
   filters: Filter[]
@@ -21,6 +21,8 @@ export const filterSlice = createSlice({
     },
     selectFilter(state, action: PayloadAction<number | null>) {
       state.selectedFilterId = action.payload
+      const filter = state.filters.find(c => c.id === action.payload)
+      if (filter) filter.ureadMessages = false
     },
     updateFilter(state, action: PayloadAction<Filter>) {
       const idx = state.filters.findIndex(f => f.id === action.payload.id)

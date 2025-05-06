@@ -1,4 +1,4 @@
-import { Chat } from '@shared/type/chat'
+import { Chat } from '@shared/types/chat'
 
 import { api } from '@api/initance'
 

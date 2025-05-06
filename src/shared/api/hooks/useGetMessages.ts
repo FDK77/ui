@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Message } from '@shared/type/message'
+import { Message } from '@shared/types/message'
 
 import { getMessages } from '@api/requests'
 

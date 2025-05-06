@@ -3,10 +3,7 @@ import { useAppSelector } from '@/shared/lib/hooks/useAppSelector'
 
 import { unselectUser } from '@shared/redux/slices'
 
-// import { getSelectUser } from './selectors'
-
 export const useModalUser = () => {
-  //   const selectUser = useAppSelector(getSelectUser)
   const selectUser = useAppSelector(state => state.user.user)
   const isOpen = useAppSelector(state => state.user.isOpen)
   const dispatch = useAppDispatch()

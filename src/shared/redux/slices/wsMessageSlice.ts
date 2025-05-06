@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Message } from '@/shared/type/message'
+import { WsMessage } from '@/shared/types/message'
 
 interface WsState {
-  lastMessagesByFilterId: Record<number, Message>
-  lastMessagesByChatId: Record<number, Message>
+  lastMessagesByFilterId: Record<number, WsMessage>
+  lastMessagesByChatId: Record<number, WsMessage>
   unreadFilterIdsByChatId: Record<number, number[]> // chatId → [filterId, ...]
 }
 
@@ -18,7 +18,7 @@ export const wsMessageSlice = createSlice({
   name: 'ws',
   initialState,
   reducers: {
-    messageReceived(state, action: PayloadAction<{ message: Message; currentFilterId: number }>) {
+    messageReceived(state, action: PayloadAction<{ message: WsMessage; currentFilterId: number }>) {
       const { message: msg, currentFilterId } = action.payload
 
       state.lastMessagesByFilterId[msg.filterId] = msg

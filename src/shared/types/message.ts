@@ -6,6 +6,9 @@ export interface Message {
   summary: null | string
   timestamp: string
   sender: User
-  filterId: number
+}
+
+export interface WsMessage extends Message {
   chatId: number
+  filterId: number
 }

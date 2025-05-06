@@ -1,4 +1,4 @@
-import { Message } from '@shared/type/message'
+import { Message } from '@shared/types/message'
 
 import { api } from '@api/initance'
 

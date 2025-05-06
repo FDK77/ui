@@ -5,7 +5,7 @@ import SockJS from 'sockjs-client/dist/sockjs'
 
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector'
 import { messageReceived } from '@/shared/redux/slices/wsMessageSlice'
-import { Message } from '@/shared/type/message'
+import { Message } from '@/shared/types/message'
 
 import { useAppDispatch } from '@lib/hooks/useAppDispatch'
 

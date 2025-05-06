@@ -14,8 +14,8 @@ export const ProcedureAvatar = ({ path, name }: ProcedureAvatarProps) => {
           <AvatarFallback>{name}</AvatarFallback>
         </Avatar>
       ) : (
-        <div className='item-center flex min-h-8 min-w-8 justify-center rounded-full bg-blue-500 text-xl font-bold text-white'>
-          {name.at(1)}
+        <div className='flex h-8 min-h-8 w-8 min-w-8 items-center justify-center rounded-full bg-blue-500 text-xl font-bold text-white'>
+          {name.at(0)?.toLocaleUpperCase()}
         </div>
       )}
     </>

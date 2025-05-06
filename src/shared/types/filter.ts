@@ -1,7 +1,8 @@
 export interface Filter {
-  id: number | null
+  id: number
   name: string
   value: string
   color: string
   summary: boolean
+  ureadMessages: boolean
 }
