@@ -84,7 +84,7 @@ export const Chats = () => {
                 name={chat.title}
               />
 
-              <div className='info ml-2.5 flex w-full flex-col justify-between'>
+              <div className='info ml-2.5 flex w-full min-w-0 flex-col justify-between'>
                 <div className='flex items-center justify-between'>
                   <div className='flex space-x-1'>
                     {chat.type === 'CHANNEL' ? (
@@ -101,6 +101,7 @@ export const Chats = () => {
                 <Text
                   text={lastMessage[chat.chatId]?.text ?? chat.lastMessage ?? ''}
                   opacity={!(chat.chatId === selectedChatId)}
+                  className='w-full overflow-hidden text-ellipsis whitespace-nowrap'
                 />
               </div>
             </div>

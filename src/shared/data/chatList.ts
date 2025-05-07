@@ -22,7 +22,8 @@ export const CHAT_LIST: Chat[] = [
     title: 'Москва сейчас',
     type: 'CHANNEL',
     avatar: null,
-    lastMessage: 'aboba',
+    lastMessage:
+      'fds;akljf ;kldsjfk;ljdsakl;fj dklsjfk;j dsk;ljfkjd skljfdk;lsj akl;fjdk;lsaj fkl;d sak;jfkldsjafkldksja klfjdsalk; jfkl;dsja lkjfdklsaj fkldsjakl jflkds;ja kl;j',
     unreadMessages: true
   },
   {
