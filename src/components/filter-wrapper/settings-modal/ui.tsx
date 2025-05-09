@@ -26,12 +26,15 @@ export const ModalSettingsFilter = () => {
     >
       <form
         onSubmit={handleSubmit}
-        className='z-101 flex w-100 flex-col rounded-md bg-[#212121] p-5'
+        className='z-101 flex h-11/12 w-100 flex-col rounded-md bg-[#212121] p-5'
         onClick={e => e.stopPropagation()}
       >
         <Title title={'Filters'} />
 
-        <div className='mt-5 space-y-2.5'>
+        <div
+          className='mt-5 space-y-2.5 overflow-auto pr-2'
+          style={{ scrollbarWidth: 'thin', scrollbarColor: '#3c3c3c transparent' }}
+        >
           {localFilters.map((filter, index) => (
             <div
               key={index}
