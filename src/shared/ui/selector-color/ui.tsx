@@ -16,7 +16,7 @@ export const ColorSelect = ({ value, onChange }: ColorSelectProps) => {
   useEffect(() => {
     if (open && dropdownRef.current) {
       const dropdownRect = dropdownRef.current.getBoundingClientRect()
-      if (dropdownRect.bottom > window.innerHeight) {
+      if (dropdownRect.bottom > window.innerHeight - 100) {
         dropdownRef.current.style.top = `-${dropdownRect.height + 8}px`
       } else {
         dropdownRef.current.style.top = '100%'

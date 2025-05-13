@@ -26,7 +26,7 @@ export const ModalSettingsFilter = () => {
     >
       <form
         onSubmit={handleSubmit}
-        className='z-101 flex h-11/12 w-100 flex-col rounded-md bg-[#212121] p-5'
+        className='z-101 flex max-h-11/12 w-100 flex-col rounded-md bg-[#212121] p-5'
         onClick={e => e.stopPropagation()}
       >
         <Title title={'Filters'} />

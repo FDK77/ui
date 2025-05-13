@@ -65,7 +65,7 @@ export const useSendSettings = () => {
   const handleAddFilter = () => {
     setLocalFilters(prev => [
       ...prev,
-      { id: 0, name: '', value: '', summary: false, color: '', unreadMessages: false }
+      { id: 0, name: '', value: '', summary: false, color: '#000000', unreadMessages: false }
     ])
   }
 
