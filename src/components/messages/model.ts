@@ -28,6 +28,7 @@ export const useMessages = () => {
     if (selectedFilterId == null) {
       setDataMessages([]) // очищаем, если нет фильтра
     } else {
+      setDataMessages([])
       setDataMessages(initialMessages) // устанавливаем сообщения
     }
   }, [initialMessages, selectedFilterId])

@@ -52,7 +52,7 @@ export const Messages = () => {
         >
           {selectedFilterId && (
             <button
-              className='absolute top-10 right-10 cursor-pointer'
+              className='absolute top-5 right-5 cursor-pointer'
               onClick={() => handelDelete(selectedFilterId)}
             >
               <DeleteIcon />
